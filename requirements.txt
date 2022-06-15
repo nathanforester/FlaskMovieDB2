@@ -4,7 +4,7 @@ Flask-WTF==0.14.3
 itsdangerous>=2.0
 Jinja2>=3.0
 MarkupSafe>=2.0
-SQLAlchemy>=2.0
+SQLAlchemy>=0.0
 WTForms>=2.0
 pymysql>=2.0
 sqlalchemy_utils==0.38.2
