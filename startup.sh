@@ -6,8 +6,8 @@ sudo apt install mysql-server -y
 
 python3 -m venv venv
 source venv/bin/activate
-pip3 install -r requirements.txt
+pip3 install -r /home/ubuntu/FlaskMovieDB2/requirements.txt
 
-python3 create.py
+python3 /home/ubuntu/FlaskMovieDB2/create.py
 
 
