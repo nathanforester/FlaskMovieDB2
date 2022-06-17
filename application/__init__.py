@@ -11,9 +11,8 @@ username = os.environ.get('USERNAME')
 password = os.environ.get('PASSWORD')
 endpoint  = os.environ.get('ENDPOINT')
 name     = os.environ.get('NAME')
-uri = (f'{username}:{password}@{endpoint}/{name}')
 
-url = f'mysql+pymysql://{uri}'
+url = f'mysql+pymysql://{username}:{password}@{endpoint}/{name}'
 app.config['SQLALCHEMY_DATABASE_URI'] = url
 app.config['SECRET_KEY'] = '123456789'
 
