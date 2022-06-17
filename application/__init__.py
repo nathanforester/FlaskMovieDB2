@@ -12,7 +12,7 @@ db = SQLAlchemy(app)
 username = os.environ.get('USERNAME')
 password = os.environ.get('PASSWORD')
 endpoint  = os.environ.get('ENDPOINT')
-name     = os.environ.get('NAME ')
+name     = os.environ.get('NAME')
 uri = (f'{username}:{password}@{endpoint}/{name}')
 
 url = f'mysql+pymysql://{uri}'
