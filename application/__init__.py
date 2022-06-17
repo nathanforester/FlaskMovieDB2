@@ -3,14 +3,17 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
+from dotenv import load_dotenv
+from pathlib import Path
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
 
-username = os.environ.get('USERNAME')
-password = os.environ.get('PASSWORD')
-environ  = os.environ.get('DB_ENDPOINT')
-name     = os.environ.get('DB_NAME')
+username = Path('/home/ubuntu/username')
+password = Path('/home/ubuntu/password')
+endpoint  = Path('/home/ubuntu/endpoint')
+name     = Path('/home/ubuntu/name')
+load_dotenv(username=username, password=password, endpoint=endpoint, name=name)
 
 url = f'mysql+pymysql://{username}:{password}@{environ}/{name}'
 app.config['SQLALCHEMY_DATABASE_URI'] = url
