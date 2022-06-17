@@ -17,12 +17,6 @@ COPY . /opt/main
 
 WORKDIR /opt/main
 
-RUN pip3 install -r requirements.txt
-
-RUN python3 -m pip uninstall flask-sqlalchemy -y
-
-RUN python3 -m pip install flask-sqlalchemy -y
-
 RUN pip install flask
 
 RUN pip install flask_sqlalchemy
