@@ -2,9 +2,12 @@ FROM python:3.8
 
 RUN apt update
 
-ARG USERNAME PASSWORS ENDPOINT NAME
+ARG USERNAME
+ARG PASSWORD
+ARG ENDPOINT
+ARG NAME
 
-ENV USERNAME=$USERNAME PASSWORD=$PASSWORD ENDPOINT=$ENDPOINT NAME=$NAME
+RUN echo ${USERNAME}
 
 RUN apt install python3 python3-pip python3-venv -y
 
@@ -15,6 +18,20 @@ COPY . /opt/main
 WORKDIR /opt/main
 
 RUN pip3 install -r requirements.txt
+
+RUN python3 -m pip uninstall flask-sqlalchemy -y
+
+RUN python3 -m pip install flask-sqlalchemy -y
+
+RUN pip install flask
+
+RUN pip install flask_sqlalchemy
+
+RUN pip install sqlalchemy_utils
+
+RUN pip install pymysql
+
+RUN pip install flask_wtf
 
 RUN python3 create.py
 
