@@ -9,14 +9,13 @@ from pathlib import Path
 app = Flask(__name__)
 db = SQLAlchemy(app)
 
-username = Path('/home/ubuntu/username')
-password = Path('/home/ubuntu/password')
-endpoint  = Path('/home/ubuntu/endpoint')
-name     = Path('/home/ubuntu/name')
-uri = (f'{username}{password}{endpoint}{name}')
-load_dotenv(stream=uri)
+username = os.environ.get('USERNAME')
+password = os.environ.get('PASSWORD')
+endpoint  = os.environ.get('ENDPOINT')
+name     = os.environ.get('NAME ')
+uri = (f'{username}:{password}@{endpoint}/{name}')
 
-url = f'mysql+pymysql://{load_dotenv}'
+url = f'mysql+pymysql://{uri}'
 app.config['SQLALCHEMY_DATABASE_URI'] = url
 app.config['SECRET_KEY'] = '123456789'
 
