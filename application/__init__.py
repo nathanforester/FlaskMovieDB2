@@ -13,9 +13,9 @@ username = Path('/home/ubuntu/username')
 password = Path('/home/ubuntu/password')
 endpoint  = Path('/home/ubuntu/endpoint')
 name     = Path('/home/ubuntu/name')
-load_dotenv(username=username, password=password, endpoint=endpoint, name=name)
+load_dotenv(stream=f'{username}:{password}@{endpoint}/{name}')
 
-url = f'mysql+pymysql://{username}:{password}@{environ}/{name}'
+url = f'mysql+pymysql://{load_dotenv}'
 app.config['SQLALCHEMY_DATABASE_URI'] = url
 app.config['SECRET_KEY'] = '123456789'
 
