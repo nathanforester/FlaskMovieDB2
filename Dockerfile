@@ -2,6 +2,8 @@ FROM python:3.8
 
 RUN apt update
 
+ARG USERNAME PASSWORS ENDPOINT NAME
+
 ENV USERNAME=$USERNAME PASSWORD=$PASSWORD ENDPOINT=$ENDPOINT NAME=$NAME
 
 RUN apt install python3 python3-pip python3-venv -y
