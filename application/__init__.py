@@ -13,7 +13,7 @@ username = Path('/home/ubuntu/username')
 password = Path('/home/ubuntu/password')
 endpoint  = Path('/home/ubuntu/endpoint')
 name     = Path('/home/ubuntu/name')
-uri = (username + password + endpoint + name)
+uri = (f'{username}{password}{endpoint}{name}')
 load_dotenv(stream=uri)
 
 url = f'mysql+pymysql://{load_dotenv}'
