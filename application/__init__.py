@@ -13,7 +13,8 @@ username = Path('/home/ubuntu/username')
 password = Path('/home/ubuntu/password')
 endpoint  = Path('/home/ubuntu/endpoint')
 name     = Path('/home/ubuntu/name')
-load_dotenv(stream=f'{username}:{password}@{endpoint}/{name}')
+uri = (username + password + endpoint + name)
+load_dotenv(stream=uri)
 
 url = f'mysql+pymysql://{load_dotenv}'
 app.config['SQLALCHEMY_DATABASE_URI'] = url
