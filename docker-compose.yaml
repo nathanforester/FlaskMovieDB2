@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  main:
+    image: nathanforester321/main:latest
+    build: ./
+    ports:
+        - target: 5000
+          published: 5000
+    environment:
+      USERNAME: "${USERNAME}"
+      PASSWORD: "${PASSWORD}"
+      ENDPOINT: "${ENDPOINT}"
+      NAME: "${NAME}"
+    deploy:
+      replicas: 1
