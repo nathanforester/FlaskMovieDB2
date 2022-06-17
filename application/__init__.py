@@ -3,8 +3,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
-from dotenv import load_dotenv
-from pathlib import Path
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
