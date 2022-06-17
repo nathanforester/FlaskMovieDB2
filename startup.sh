@@ -24,7 +24,7 @@ pip3 install python-dotenv
 
 python3 /home/ubuntu/FlaskMovieDB2/create.py
 
-python3 /home/ubuntu/FlaskMovieDB2/app.py
+
 
 
 
