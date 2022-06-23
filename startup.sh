@@ -22,6 +22,8 @@ pip install flask_wtf
 
 pip3 install python-dotenv
 
+pip3 install pytest
+
 python3 /home/ubuntu/FlaskMovieDB2/create.py
 
 
