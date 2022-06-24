@@ -42,8 +42,6 @@ class Routes():
     @app.route('/delete/<int:idnum>')
     def delete(idnum):
         movies_delete = Movies.query.get(idnum)
-        print(movies_delete.text, file=sys.stderr)
-        print(movies_delete.text, file=sys.stdout)
         db.session.delete(movies_delete)
         db.session.commit()
         return redirect(url_for('index'))
