@@ -12,8 +12,8 @@ password = os.environ.get('PASSWORD')
 endpoint  = os.environ.get('ENDPOINT')
 name     = os.environ.get('NAME')
 
-url = 'sqlite:///C:\\Users\\nathan.forester\\Documents\\movies.db' 
-# url = f'mysql+pymysql://{username}:{password}@{endpoint}/{name}'
+# url = 'sqlite:///C:\\Users\\nathan.forester\\Documents\\movies.db' 
+url = f'mysql+pymysql://{username}:{password}@{endpoint}/{name}'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = url
 app.config['SECRET_KEY'] = '123456789'
