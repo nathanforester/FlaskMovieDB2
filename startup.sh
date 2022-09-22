@@ -26,6 +26,8 @@ sudo apt install python-pytest -y
 
 python3 /home/ubuntu/FlaskMovieDB2/create.py
 
+docker-compose -f /home/ubuntu/FlaskMovieDB2/docker-compose.yaml up -d
+
 
 
 
