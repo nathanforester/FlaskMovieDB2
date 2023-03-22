@@ -3,8 +3,8 @@ FROM python:3.8
 RUN apt update
 
 ARG USERNAME
-ARG PASSWORD
-ARG ENDPOINT
+ARG 
+
 ARG NAME
 
 RUN echo ${USERNAME}
