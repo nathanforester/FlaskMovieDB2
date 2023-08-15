@@ -6,7 +6,7 @@ import unittest
 from unittest import mock
 from sqlite3 import * 
 
-from app import app
+
 
 dbc = mock.MagicMock()
 

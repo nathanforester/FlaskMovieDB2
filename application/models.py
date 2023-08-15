@@ -10,3 +10,7 @@ class Review(db.Model):
     rating = db.Column(db.Integer)
     movies_id = db.Column(db.Integer, db.ForeignKey('movies.id'), nullable=True)
 
+class Accounts(db.Model): 
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(255))
+    password = db.Column(db.String(30))

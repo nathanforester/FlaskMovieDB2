@@ -1,23 +1,89 @@
 import sys
 
+import os
+import urllib.request
+from flask import Flask, flash, request, redirect, url_for, render_template, session
+from werkzeug.utils import secure_filename
+
 from flask import render_template, redirect, url_for, request
+from sqlite3 import *
+import pymysql
+import re
 
 from flask import Flask, jsonify, request
 import json, os, signal
+import sqlite3
 
 from application import app, db
-from application.models import Movies, Review
-from application.forms import MoviesForm, ReviewForm
+from application.models import Movies, Review, Accounts
+from application.forms import MoviesForm, ReviewForm, AccountsForm
 
 class Routes():
     
     id_num = Movies().id
     id_num = str(id_num)
 
-    @app.route('/', methods=['GET', 'POST'])
-    def index():
+    @app.route('/')
+
+    @app.route('/login', methods =['GET', 'POST'])
+    def login():
+        msg = ''
+        if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+            username  = "' OR 1=1; --" #request.form['username']
+            password = request.form['password']
+            connection = sqlite3.connect('movies.db')
+            cursor = connection.cursor()
+            cursor.execute('SELECT * FROM Accounts WHERE username = ? AND password = ?', (username, password, ))
+            account = cursor.fetchone()
+            if account:
+                session['loggedin'] = True
+                # session_id = int(session['id'])
+                # account_id = int(account['id'])
+                # session_id = account_id
+                # session['username'] = account['username']
+                msg = 'Logged in successfully !'
+                return render_template('index.html', msg = msg)
+            else:
+                msg = 'Incorrect username / password !'
+        return render_template('login.html', msg = msg)
+
+    @app.route('/user', methods=['GET', 'POST'])
+    def user():
         all_movies = Movies.query.all()
-        return render_template('index.html', all_movies=all_movies)
+        return render_template('movie_index.html', all_movies=all_movies)
+    
+    @app.route('/logout', methods=['GET', 'POST'] )
+    def logout():
+        session.pop('loggedin', None)
+        session.pop('id', None)
+        session.pop('username', None)
+        return redirect(url_for('login'))
+    
+    @app.route('/register', methods =['GET', 'POST'])
+    def register():
+        msg = ''
+        if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+            username = request.form['username']
+            password = request.form['password']
+            connection = sqlite3.connect('movies.db')
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM Accounts WHERE username = ?", (username, ))
+            account = cursor.fetchone()
+            if account:
+                msg = 'Account already exists !'
+            # elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            #     msg = 'Invalid email address !'
+            elif not re.match(r'[A-Za-z0-9]+', username):
+                msg = 'Username must contain only characters and numbers !'
+            elif not username or not password:
+                msg = 'Please fill out the form !'
+            else:
+                cursor.execute('INSERT INTO Accounts (username, password) VALUES (?, ?)', (username, password, ))
+                connection.commit()
+                msg = 'You have successfully registered !'
+        elif request.method == 'POST':
+            msg = 'Please fill out the form !'
+        return render_template('register.html', msg = msg)
 
     @app.route('/add', methods=['GET', 'POST'])
     def add():
@@ -26,7 +92,7 @@ class Routes():
             new_movie = Movies(name=form.name.data)
             db.session.add(new_movie)
             db.session.commit()
-            return redirect(url_for('index'))
+            return redirect(url_for('movie_index'))
         return render_template('add.html', form=form)
 
     @app.route('/update/<int:idnum>', methods=['GET', 'POST'])
@@ -36,7 +102,7 @@ class Routes():
         if form.validate_on_submit():
             movies_update.name = form.name.data
             db.session.commit()
-            return redirect(url_for('index'))
+            return redirect(url_for('movie_index'))
         return render_template('update.html', form=form)
 
     @app.route('/delete/<int:idnum>')
@@ -44,7 +110,7 @@ class Routes():
         movies_delete = Movies.query.get(idnum)
         db.session.delete(movies_delete)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('movie_index'))
 
     @app.route('/add_review/<int:idnum>', methods=['GET', 'POST'])
     def add_review(idnum):

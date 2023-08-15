@@ -2,7 +2,26 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired, ValidationError 
 
-from application.models import Movies, Review
+from application.models import Movies, Review, Accounts
+
+class AccountsCheck: 
+    def __init__(self, message):
+        self.message = message
+
+    def __call__(self, form, field): 
+        all_movies = Accounts.query.all()
+        for accounts in all_accounts:
+            if accounts.username == field.data:
+                raise ValidationError(self.message)
+
+class AccountsForm(FlaskForm):
+    username = StringField('User Name',
+                validators=[
+                    DataRequired(),
+                ]
+            )
+    password = StringField('Password')
+    submit = SubmitField('Add User')
 
 class MoviesCheck: 
     def __init__(self, message):
@@ -13,6 +32,7 @@ class MoviesCheck:
         for movies in all_movies:
             if movies.name == field.data:
                 raise ValidationError(self.message)
+
 
 class MoviesForm(FlaskForm):
     name = StringField('Movie Name',
