@@ -9,7 +9,7 @@ class AccountsCheck:
         self.message = message
 
     def __call__(self, form, field): 
-        all_movies = Accounts.query.all()
+        all_accounts = Accounts.query.all()
         for accounts in all_accounts:
             if accounts.username == field.data:
                 raise ValidationError(self.message)
