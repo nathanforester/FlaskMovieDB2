@@ -104,7 +104,7 @@ class Routes():
             new_movie = Movies(name=form.name.data)
             db.session.add(new_movie)
             db.session.commit()
-            return redirect(url_for('movie_index'))
+            return redirect(url_for('user'))
         return render_template('add.html', form=form)
     
     
@@ -116,7 +116,7 @@ class Routes():
         if form.validate_on_submit():
             movies_update.name = form.name.data
             db.session.commit()
-            return redirect(url_for('movie_index'))
+            return redirect(url_for('user'))
         return render_template('update.html', form=form)
 
     @app.route('/delete/<int:idnum>')
@@ -124,7 +124,7 @@ class Routes():
         movies_delete = Movies.query.get(idnum)
         db.session.delete(movies_delete)
         db.session.commit()
-        return redirect(url_for('movie_index'))
+        return redirect(url_for('user'))
 
     @app.route('/add_review/<int:idnum>', methods=['GET', 'POST'])
     def add_review(idnum):
