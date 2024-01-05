@@ -12,3 +12,4 @@ pymysql
 sqlalchemy_utils
 pytest
 Flask-Testing
+flask_bcrypt
