@@ -7,9 +7,9 @@ services:
       dockerfile: Dockerfile
       args:
          - USERNAME=${USERNAME}
-         - PASSWORD=${}
-         - ENDPOINT=
-         - 
+         - PASSWORD=${PASSWORD}
+         - ENDPOINT=${ENDPOINT}
+         - NAME=${NAME}
     ports:
         - target: 5000
           published: 5000
