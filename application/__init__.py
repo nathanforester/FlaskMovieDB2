@@ -9,7 +9,7 @@ app = Flask(__name__)
 username = os.environ.get('USERNAME')
 password = os.environ.get('PASSWORD')
 endpoint  = os.environ.get('ENDPOINT')
-name     = os.environ.get('DBNAMEDA')
+name     = os.environ.get('NAME')
 
 #url = 'sqlite:///C:\\Users\\nathan.forester\\Documents\\movies.db' 
 #url = 'sqlite:////home/ubuntu/FlaskMovieDB2/movies.db' 
